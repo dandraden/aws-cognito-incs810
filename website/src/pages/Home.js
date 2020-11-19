@@ -14,7 +14,7 @@
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SiteNav from '../components/SiteNav';
+import DynamicImage from '../components/DynamicImage';
 import SiteFooter from '../components/SiteFooter';
 
 import '../css/main.css';
@@ -86,6 +86,9 @@ const StorySection = () => (
 const Home = () => {
   return (
     <div className="page-home">
+      <header className="site-header">
+          <DynamicImage src="logo.png"/>
+      </header>
       <AboutSection/>
       <SiteFooter/>
     </div>

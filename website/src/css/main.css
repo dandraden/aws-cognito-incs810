@@ -2110,7 +2110,7 @@ img {
 }
 
 .page-home .site-header .title {
-    background: url("https://s3.amazonaws.com/aws-mobile-hub-images/wild-rydes/wr-home-top.jpg") no-repeat top;
+    background: #ffc400 no-repeat top;
     background-size: cover;
     padding-bottom: 70.2753441802%;
     margin: 0;
