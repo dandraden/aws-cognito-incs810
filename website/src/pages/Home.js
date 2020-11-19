@@ -86,11 +86,15 @@ const StorySection = () => (
 const Home = () => {
   return (
     <div className="page-home">
-      <header className="site-header">
+      <div className="page-unicorns2">
+        <header className="site-header2">
           <DynamicImage src="logo.png"/>
-      </header>
-      <AboutSection/>
-      <SiteFooter/>
+        </header>
+      </div>
+      <div>
+        <AboutSection/>
+        <SiteFooter/>
+      </div>
     </div>
   );
 }; 

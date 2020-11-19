@@ -2446,6 +2446,13 @@ img {
     padding: 1.875rem 0
 }
 
+.page-unicorns2 .site-header2 {
+    background: #ffc400 no-repeat top;
+    color: rgb(4, 2, 128);
+    background-size: cover;
+    text-align: center;
+}
+
 @media screen and (min-width:64em) {
     .page-unicorns .site-header {
         min-height: 31.25rem
