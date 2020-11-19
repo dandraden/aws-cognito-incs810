@@ -15,6 +15,7 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 import DynamicImage from '../components/DynamicImage';
+import SiteFooter from '../components/SiteFooter';
 import { withRouter } from 'react-router-dom';
 
 import '../css/app.css';
@@ -136,6 +137,7 @@ async onSubmitVerification(e) {
             <input disabled={!(isValidEmail && isValidPassword && isValidConfirmation)} type="submit" value="Register"/>
           </form>
         </section>
+        <SiteFooter/>
       </div>
     );
   }
@@ -157,6 +159,7 @@ async onSubmitVerification(e) {
             <input disabled={!(isValidCode&&isValidEmail)} type="submit" value="Verify"/>
           </form>
         </section>
+        <SiteFooter/>
       </div>
     );
   }

@@ -16,7 +16,7 @@ import React from 'react';
 import { Auth } from 'aws-amplify';
 import DynamicImage from '../components/DynamicImage';
 import { withRouter } from 'react-router-dom';
-import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 
 import '../css/app.css';
 
@@ -53,7 +53,7 @@ class SignIn extends React.Component {
             console.log('Cognito User Identity Token:', session.getIdToken().getJwtToken());
             // console.log('Cognito User Refresh Token', session.getRefreshToken().getToken());
             this.setState({ stage: 0, email: '', password: '', code: '' });
-            this.props.history.replace('/');
+            this.props.history.replace('/profile');
         }
     } catch (err) {
         alert(err.message);
@@ -74,7 +74,7 @@ async onSubmitVerification(e) {
         console.log('Cognito User Identity Token:', session.getIdToken().getJwtToken());
         // console.log('Cognito User Refresh Token', session.getRefreshToken().getToken());
         this.setState({ stage: 0, email: '', password: '', code: '' });
-        this.props.history.replace('/');
+        this.props.history.replace('/profile');
     } catch (err) {
         alert(err.message);
         console.error('Auth.confirmSignIn(): ', err);
@@ -109,13 +109,13 @@ async onSubmitVerification(e) {
         </header>
         <section className="form-wrap">
           <h1>Sign in</h1>
-          <SiteNav/>
           <form id="registrationForm" onSubmit={(e) => this.onSubmitForm(e)}>
             <input className={isValidEmail?'valid':'invalid'} type="email" placeholder="Email" value={this.state.email} onChange={(e) => this.onEmailChanged(e)}/>
             <input className={isValidPassword?'valid':'invalid'} type="password" placeholder="Password" value={this.state.password} onChange={(e) => this.onPasswordChanged(e)}/>
             <input disabled={!(isValidEmail && isValidPassword)} type="submit" value="Sign in"/>
           </form>
         </section>
+        <SiteFooter/>
       </div>
     );
   }
@@ -137,6 +137,7 @@ async onSubmitVerification(e) {
             <input disabled={!(isValidCode&&isValidEmail)} type="submit" value="Verify"/>
           </form>
         </section>
+        <SiteFooter/>
       </div>
     );
   }
