@@ -6,7 +6,7 @@ docs/.DS_Store
 /site
 
 #Node Modules
-/website/node_modules
+'website/node_modules'
 
 #amplify Config
-/website/src/amplify-config.js
+website/src/amplify-config.js
