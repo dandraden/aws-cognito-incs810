@@ -131,7 +131,7 @@ async onSubmitVerification(e) {
           <form id="registrationForm" onSubmit={(e) => this.onSubmitForm(e)}>
             <input className={isValidEmail?'valid':'invalid'} type="email" placeholder="Email" value={this.state.email} onChange={(e) => this.onEmailChanged(e)}/>
             <input className='valid' type="phone" placeholder="Phone" value={this.state.phone} onChange={(e) => this.onPhoneChanged(e)}/>
-            <input className='valid' type="Genre" placeholder="Genre" value={this.state.genre} onChange={(e) => this.onGenreChanged(e)}/>
+            <input className={isValidGenre?'valid':'invalid'} type="Genre" placeholder="Genre" value={this.state.genre} onChange={(e) => this.onGenreChanged(e)}/>
             <input className={isValidPassword?'valid':'invalid'} type="password" placeholder="Password" value={this.state.password} onChange={(e) => this.onPasswordChanged(e)}/>
             <input className={isValidConfirmation?'valid':'invalid'} type="password" placeholder="Confirm Password" value={this.state.confirm} onChange={(e) => this.onConfirmationChanged(e)}/>
             <input disabled={!(isValidEmail && isValidPassword && isValidConfirmation)} type="submit" value="Register"/>

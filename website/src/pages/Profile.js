@@ -13,7 +13,6 @@
  *  permissions and limitations under the License.
  */
 import React from 'react';
-import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import DynamicImage from '../components/DynamicImage';
 import { Auth } from 'aws-amplify';
@@ -27,7 +26,8 @@ class Profile extends React.Component {
             user: {
                 attributes: {
                     email: 'me@example.com',
-                    phone_number: '+1123456789'
+                    phone_number: '+1123456789',
+                    'custom:genre': 'xpto'
                 }
             }
         }
@@ -58,15 +58,24 @@ class Profile extends React.Component {
           <div>
           <DynamicImage src="logo.png"/>
           { <S3Image imgKey={this.state.image_key} onLoad={(url) => this.onImageLoad(url)} picker/> }
+          <br></br>
     		<table align="center">
     		<tbody>
              <tr>
-             <td>E-mail:</td>
-             <td>{this.state.user.attributes.email}</td>
+             <td style={{fontWeight: "bold"}}>Token: </td>
+             <td align="left">{this.state.user.attributes.sub}</td>
+             </tr>
+             <tr>
+             <td style={{fontWeight: "bold"}}>E-mail: </td>
+             <td align="left">{this.state.user.attributes.email}</td>
              </tr>
               <tr>
-             <td>Phone:</td>
-             <td>{this.state.user.attributes.phone_number}</td>
+             <td style={{fontWeight: "bold"}}>Phone: </td>
+             <td align="left">{this.state.user.attributes.phone_number}</td>
+             </tr>
+             <tr>
+             <td style={{fontWeight: "bold"}}>Genre: </td>
+             <td align="left">{this.state.user.attributes["custom:genre"]}</td>
              </tr>
              </tbody>
             </table>
