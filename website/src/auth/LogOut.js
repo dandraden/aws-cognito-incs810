@@ -16,7 +16,7 @@ import React from 'react';
 import { Auth } from 'aws-amplify';
 import DynamicImage from '../components/DynamicImage';
 import { withRouter } from 'react-router-dom';
-import SiteFooterLogOut from '../components/SiteFooterLogout';
+import SiteFooter from '../components/SiteFooter';
 
 import '../css/app.css';
 
@@ -60,7 +60,7 @@ async onSubmitVerification(e) {
              <input type="submit" value="Log Out"/>
           </form>
         </section>
-        <SiteFooterLogOut/>
+        <SiteFooter/>
       </div>
     );
   }

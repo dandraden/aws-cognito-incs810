@@ -14,19 +14,12 @@
  */
 import React from 'react';
 import SiteFooter from '../components/SiteFooter';
-import SiteFooterLogout from '../components/SiteFooterLogout';
 import DynamicImage from '../components/DynamicImage';
 import { Auth } from 'aws-amplify';
 import { S3Image } from 'aws-amplify-react';
 import '../css/main.css';
-import Amplify from 'aws-amplify';
-import awsConfig from '../amplify-config';
-import { Route } from 'react-router-dom';
 
-
-Amplify.configure(awsConfig);
-
-const isAuthenticated = () => Amplify.Auth.user !== null;
+let token = '';
 
 class Profile extends React.Component {
     constructor(props) {
@@ -56,12 +49,16 @@ class Profile extends React.Component {
                 'picture': this.state.image_key
             });
             console.log(result);
+            const session = await Auth.currentSession();
+            token = session.getIdToken().getJwtToken();
+            console.log('Cognito User Identity Token:', session.getIdToken().getJwtToken());
         } catch (ex) {
             console.error('Attribute update error:', ex);
         }
     }
 
     render() {
+      
       return (<div className="page-unicorns">
         <header className="site-header">
           <div>
@@ -71,7 +68,7 @@ class Profile extends React.Component {
     		<table align="center">
     		<tbody>
              <tr>
-             <td style={{fontWeight: "bold"}}>Token: </td>
+             <td style={{fontWeight: "bold"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub: </td>
              <td align="left">{this.state.user.attributes.sub}</td>
              </tr>
              <tr>
@@ -86,17 +83,15 @@ class Profile extends React.Component {
              <td style={{fontWeight: "bold"}}>Genre: </td>
              <td align="left">{this.state.user.attributes["custom:genre"]}</td>
              </tr>
+             <tr>
+             <td style={{fontWeight: "bold"}}>Token: </td>
+             <td align="left"><div id="truncateLongTexts">{token}</div></td>
+             </tr>
              </tbody>
             </table>
     	</div>
         </header>
-        <Route
-            render={props => (
-                isAuthenticated() === true
-                ? <SiteFooterLogout/>
-                : <SiteFooter/>
-            )} 
-        />
+            <SiteFooter/>
       </div>
     );
   }

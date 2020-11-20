@@ -24,6 +24,7 @@ import awsConfig from './amplify-config';
 Amplify.configure(awsConfig);
 
 const isAuthenticated = () => Amplify.Auth.user !== null;
+window.$token = 'aa' //global variable
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route

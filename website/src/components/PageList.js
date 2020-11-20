@@ -20,7 +20,8 @@ const PageList = () => {
         { url: '/', title: 'Home' },
         { url: '/register', title: 'Register' },
         { url: '/signin', title: 'Sign-In' },
-        { url: '/profile', title: 'Profile' }
+        { url: '/profile', title: 'Profile' },
+        { url: '/logout', title: 'Log Out' }
     ];
 
     return (

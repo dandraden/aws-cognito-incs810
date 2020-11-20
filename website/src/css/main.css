@@ -2762,3 +2762,11 @@ img {
         font-size: 1.5rem
     }
 }
+
+#truncateLongTexts {
+    width: 400px;
+    height: 100%;
+    overflow: hidden;
+    -webkit-transition: max-height .75s;
+    transition: max-height .75s;
+  }
