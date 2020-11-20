@@ -18,9 +18,9 @@ import { Link } from 'react-router-dom';
 const PageList = () => {
     const pages = [
         { url: '/', title: 'Home' },
-        { url: '/profile', title: 'Profile' },
         { url: '/register', title: 'Register' },
-        { url: '/signin', title: 'Sign In' }
+        { url: '/signin', title: 'Sign-In' },
+        { url: '/profile', title: 'Profile' }
     ];
 
     return (

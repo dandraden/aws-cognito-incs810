@@ -24,29 +24,29 @@ const AboutSection = () => (
     <div className="row column large-9 xlarge-6 xxlarge-4">
       <h2 className="section-title">Information</h2>
       <p className="content">
-        In today’s fast paced world, you’ve got places you need to be but not enough time in your jam packed schedule. Wouldn’t it be nice if there were a transportation service that changed the way you get around daily? Introducing Wild Rydes, an innovative transportation service that helps people get to their destination faster and hassle-free. Getting started is as easy as tapping a button in our app.
+        This demo application was developed by students of the INCS-810 FAVA1 2020 class to demostrate the secure serverless MFA authentication process provided by AWS Cognito.
       </p>
     </div>
     <div className="row medium-up-2 large-up-3">
       <div className="column">
         <div className="home-about-block">
-          <Link className="title icon-price" to="/profile"></Link>
-          <h3 className="section-title">Profile</h3>
-          <p className="content">Pick the valuation you're willing to pay and your ryde is set up. The only surge is the acceleration you get when taking off.</p>
-        </div>
-      </div>
-      <div className="column">
-        <div className="home-about-block">
           <Link className="title icon-download" to="/register"></Link>
           <h3 className="section-title">Register</h3>
-          <p className="content">Head over to the app store and download the Wild Rydes app. You’re just a few taps away from getting your ryde.</p>
+          <p className="content">Join our platform! Provide your identification to get your access code.</p>
         </div>
       </div>
       <div className="column">
         <div className="home-about-block">
           <Link className="title icon-success" to="/signin"></Link>
           <h3 className="section-title">Sing-In</h3>
-          <p className="content">We can get you there. Simply request a ryde on the app and we'll connect you with a unicorn immediately.</p>
+          <p className="content">Login using your access code.</p>
+        </div>
+      </div>
+      <div className="column">
+        <div className="home-about-block">
+          <Link className="title icon-price" to="/profile"></Link>
+          <h3 className="section-title">Profile</h3>
+          <p className="content">Manage your user profile and update your personal picture.</p>
         </div>
       </div>
     </div>
