@@ -12,12 +12,23 @@
  *  express or implied. See the License for the specific language governing
  *  permissions and limitations under the License.
  */
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import LogOut from './LogOut';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export {
-    SignIn,
-    SignUp,
-    LogOut
+const PageList = () => {
+    const pages = [
+        { url: '/logout', title: 'Log Out' }
+    ];
+
+    return (
+      <ul>
+        {
+          pages.map((v, i) => (
+            <li key={i}><Link to={v.url}>{v.title}</Link></li>
+          ))
+        }
+      </ul>
+    );
 };
+
+export default PageList;

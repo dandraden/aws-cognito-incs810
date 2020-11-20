@@ -16,7 +16,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Home, FAQ, Investors, MainApp, Unicorns, Profile } from './pages';
-import { SignIn, SignUp } from './auth';
+import { SignIn, SignUp, LogOut } from './auth';
 import 'normalize.css';
 import Amplify from 'aws-amplify';
 import awsConfig from './amplify-config';
@@ -46,7 +46,8 @@ class App extends React.Component {
           <Route path="/unicorns" component={Unicorns} />
           <Route path="/register" component={SignUp} />
 	        <Route path="/signin" component={SignIn} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/logout" component={LogOut} />
+          <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/app" component={MainApp} />
         </Switch>
       </BrowserRouter>

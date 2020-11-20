@@ -14,10 +14,19 @@
  */
 import React from 'react';
 import SiteFooter from '../components/SiteFooter';
+import SiteFooterLogout from '../components/SiteFooterLogout';
 import DynamicImage from '../components/DynamicImage';
 import { Auth } from 'aws-amplify';
 import { S3Image } from 'aws-amplify-react';
 import '../css/main.css';
+import Amplify from 'aws-amplify';
+import awsConfig from '../amplify-config';
+import { Route } from 'react-router-dom';
+
+
+Amplify.configure(awsConfig);
+
+const isAuthenticated = () => Amplify.Auth.user !== null;
 
 class Profile extends React.Component {
     constructor(props) {
@@ -81,7 +90,13 @@ class Profile extends React.Component {
             </table>
     	</div>
         </header>
-        <SiteFooter/>
+        <Route
+            render={props => (
+                isAuthenticated() === true
+                ? <SiteFooterLogout/>
+                : <SiteFooter/>
+            )} 
+        />
       </div>
     );
   }

@@ -38,7 +38,7 @@ const AboutSection = () => (
       <div className="column">
         <div className="home-about-block">
           <Link className="title icon-success" to="/signin"></Link>
-          <h3 className="section-title">Sing-In</h3>
+          <h3 className="section-title">Sing In</h3>
           <p className="content">Login using your access code.</p>
         </div>
       </div>

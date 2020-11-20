@@ -12,12 +12,21 @@
  *  express or implied. See the License for the specific language governing
  *  permissions and limitations under the License.
  */
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import LogOut from './LogOut';
+import React from 'react';
+import LegalFooter from './LegalFooter';
+import PageListLogout from './PageListLogout';
 
-export {
-    SignIn,
-    SignUp,
-    LogOut
+const SiteFooterLogout = () => {
+  return (
+    <footer className="site-footer">
+      <div className="row column">
+        <nav className="footer-nav">
+          <PageListLogout/>
+        </nav>
+      </div>
+      <LegalFooter/>
+    </footer>
+  );
 };
+
+export default SiteFooterLogout;
