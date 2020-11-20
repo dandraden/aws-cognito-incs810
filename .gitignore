@@ -12,3 +12,5 @@ website/node_modules/*
 
 #amplify Config
 website/src/amplify-config.js
+
+website/bkp/*

@@ -21,6 +21,7 @@ import '../css/main.css';
 
 let token = '';
 
+
 class Profile extends React.Component {
     constructor(props) {
         super(props);
@@ -31,15 +32,43 @@ class Profile extends React.Component {
                     phone_number: '+1123456789',
                     'custom:genre': 'xpto'
                 }
-            }
+            },
+            itemChecked: false
         }
     }
+
     componentDidMount() {
         Auth.currentAuthenticatedUser().then(user => {
             console.log('Cognito User', user);
+            if (user.preferredMFA == 'NOMFA'){
+                this.itemChecked = false;
+            } else {
+                this.itemChecked = true;
+            }
             this.setState({user, image_key: 'profile-' + user.attributes.sub + '.jpg'});
         });;
     }
+
+    checkUser() {
+        Auth.currentAuthenticatedUser()
+          .then(user => console.log({ user }))
+          .catch(err => console.log(err));
+    }
+
+    async checkItem(e) {
+        let authMethod;
+
+        if(e.target.checked){
+            authMethod = 'SMS';
+        } else {
+            authMethod ='NOMFA';  
+        }
+
+        let user = await Auth.currentAuthenticatedUser();
+        await Auth.setPreferredMFA(user, authMethod);  
+        console.log(user.preferredMFA);
+    }
+
 
     async onImageLoad(url) {
         if (!this.state.user.getSession) { return };
@@ -49,16 +78,17 @@ class Profile extends React.Component {
                 'picture': this.state.image_key
             });
             console.log(result);
-            const session = await Auth.currentSession();
-            token = session.getIdToken().getJwtToken();
-            console.log('Cognito User Identity Token:', session.getIdToken().getJwtToken());
+            let user = await Auth.currentAuthenticatedUser();
+            token = user.signInUserSession.accessToken.jwtToken;
+            console.log('Cognito User Identity Token:', token);
         } catch (ex) {
             console.error('Attribute update error:', ex);
         }
     }
 
     render() {
-      
+
+
       return (<div className="page-unicorns">
         <header className="site-header">
           <div>
@@ -83,6 +113,10 @@ class Profile extends React.Component {
              <td style={{fontWeight: "bold"}}>Genre: </td>
              <td align="left">{this.state.user.attributes["custom:genre"]}</td>
              </tr>
+             <tr>
+             <td style={{fontWeight: "bold"}}>Enable MFA: </td>
+             <td align="left"><input type="checkbox"  onChange={ (e) => this.checkItem(e)  } name="mfa" defaultChecked={ this.itemChecked } /></td>
+            </tr>
              <tr>
              <td style={{fontWeight: "bold"}}>Token: </td>
              <td align="left"><div id="truncateLongTexts">{token}</div></td>
