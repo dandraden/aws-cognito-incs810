@@ -21,7 +21,6 @@ import '../css/main.css';
 
 let token = '';
 
-
 class Profile extends React.Component {
     constructor(props) {
         super(props);
@@ -30,21 +29,25 @@ class Profile extends React.Component {
                 attributes: {
                     email: 'me@example.com',
                     phone_number: '+1123456789',
-                    'custom:genre': 'xpto'
+                    'custom:genre': 'xpto',
+                    email_verified: false
                 }
             },
-            itemChecked: false
+            itemChecked: false,
+            username: ''
         }
     }
 
     componentDidMount() {
         Auth.currentAuthenticatedUser().then(user => {
             console.log('Cognito User', user);
-            if (user.preferredMFA == 'NOMFA'){
-                this.itemChecked = false;
+            if (user.preferredMFA === 'NOMFA'){
+                this.state.itemChecked = false;
             } else {
-                this.itemChecked = true;
+                this.state.itemChecked = true;
             }
+            this.state.username = user.username;
+            //console.log(user.username);
             this.setState({user, image_key: 'profile-' + user.attributes.sub + '.jpg'});
         });;
     }
@@ -55,13 +58,15 @@ class Profile extends React.Component {
           .catch(err => console.log(err));
     }
 
-    async checkItem(e) {
+    async checkItem(e, isChecked) {
         let authMethod;
 
         if(e.target.checked){
-            authMethod = 'SMS';
-        } else {
-            authMethod ='NOMFA';  
+            if(isChecked){
+                authMethod ='NOMFA'; 
+            } else {
+                authMethod = 'SMS';
+            }
         }
 
         let user = await Auth.currentAuthenticatedUser();
@@ -87,8 +92,9 @@ class Profile extends React.Component {
     }
 
     render() {
-
-
+       const isItemChecked = this.state.itemChecked;
+       const username = this.state.username;
+       
       return (<div className="page-unicorns">
         <header className="site-header">
           <div>
@@ -98,27 +104,31 @@ class Profile extends React.Component {
     		<table align="center">
     		<tbody>
              <tr>
-             <td style={{fontWeight: "bold"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub: </td>
+             <td align="right" style={{fontWeight: "bold"}}>Sub: </td>
              <td align="left">{this.state.user.attributes.sub}</td>
              </tr>
              <tr>
-             <td style={{fontWeight: "bold"}}>E-mail: </td>
+             <td align="right" style={{fontWeight: "bold"}}>Username: </td>
+             <td align="left">{username}</td>
+             </tr>
+             <tr>
+             <td align="right" style={{fontWeight: "bold"}}>E-mail: </td>
              <td align="left">{this.state.user.attributes.email}</td>
              </tr>
               <tr>
-             <td style={{fontWeight: "bold"}}>Phone: </td>
+             <td align="right" style={{fontWeight: "bold"}}>Phone: </td>
              <td align="left">{this.state.user.attributes.phone_number}</td>
              </tr>
              <tr>
-             <td style={{fontWeight: "bold"}}>Genre: </td>
+             <td align="right" style={{fontWeight: "bold"}}>Gender: </td>
              <td align="left">{this.state.user.attributes["custom:genre"]}</td>
              </tr>
              <tr>
-             <td style={{fontWeight: "bold"}}>Enable MFA: </td>
-             <td align="left"><input type="checkbox"  onChange={ (e) => this.checkItem(e)  } name="mfa" defaultChecked={ this.itemChecked } /></td>
+            <td align="right" style={{fontWeight: "bold"}}>{isItemChecked ? 'Disable MFA: ' : 'Enable MFA: '}</td>
+            <td align="left"><input type="checkbox"  onChange={ (e) => this.checkItem(e, isItemChecked)  } name="mfa" /></td> 
             </tr>
              <tr>
-             <td style={{fontWeight: "bold"}}>Token: </td>
+             <td align="right" style={{fontWeight: "bold"}}>Token: </td>
              <td align="left"><div id="truncateLongTexts">{token}</div></td>
              </tr>
              </tbody>
