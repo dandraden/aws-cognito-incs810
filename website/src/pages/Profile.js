@@ -40,16 +40,16 @@ class Profile extends React.Component {
 
     componentDidMount() {
         Auth.currentAuthenticatedUser().then(user => {
-            console.log('Cognito User', user);
+            //console.log('Cognito User', user);
             if (user.preferredMFA === 'NOMFA'){
-                this.state.itemChecked = false;
+                this.setState({itemChecked: false});
             } else {
-                this.state.itemChecked = true;
+                this.setState({itemChecked: true});
             }
-            this.state.username = user.username;
+            this.setState({username: user.username});
             //console.log(user.username);
             this.setState({user, image_key: 'profile-' + user.attributes.sub + '.jpg'});
-        });;
+        });
     }
 
     checkUser() {
